@@ -273,12 +273,12 @@ IDE_Morph.prototype.openIn = function (world) {
     var hash, myself = this, urlLanguage = null;
 
     SnapCloud.initSession(
-        function (username, isadmin, response) {
+        function (username) {
             if (username) {
                 myself.source = 'cloud';
                 if (!SnapCloud.verified) {
                         new DialogBoxMorph().inform(
-                            'Unverified account: ' + response.days_left + ' days left',
+                            'Unverified account',
                             'Your account is still unverified.\n' +
                             'Please use the verification link that\n' +
                             'was sent to your email address when you\n' +
@@ -287,8 +287,7 @@ IDE_Morph.prototype.openIn = function (world) {
                             'check your spam folder. If you still\n' +
                             'cannot find it, please use the "Resend\n' +
                             'Verification Email..." option in the cloud\n' +
-                            'menu.\n\n' +
-                            'You have ' + response.days_left + ' days left.',
+                            'menu.'
                             world,
                             myself.cloudIcon(null, new Color(0, 180, 0))
                         );
