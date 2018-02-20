@@ -287,7 +287,7 @@ IDE_Morph.prototype.openIn = function (world) {
                             'check your spam folder. If you still\n' +
                             'cannot find it, please use the "Resend\n' +
                             'Verification Email..." option in the cloud\n' +
-                            'menu.'
+                            'menu.',
                             world,
                             myself.cloudIcon(null, new Color(0, 180, 0))
                         );
