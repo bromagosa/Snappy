@@ -6917,6 +6917,8 @@ StageMorph.prototype.init = function (globals) {
 
     this.remixID = null;
 
+    this.uBlocksClient = new MicroBlocksClient();
+
     StageMorph.uber.init.call(this);
 
     this.cachedHSV = this.color.hsv();
@@ -7309,6 +7311,14 @@ StageMorph.prototype.step = function () {
         });
         this.lastWatcherUpdate = Date.now();
     }
+
+    // fetch MicroBlocks broadcasts
+    this.uBlocksClient.fetchBroadcasts();
+
+    // deal with latest MicroBlocks broadcast
+    this.uBlocksClient.pendingBroadcasts.forEach(function () {
+        // TODO broadcast them
+    })
 };
 
 StageMorph.prototype.stepGenericConditions = function (stopAll) {
