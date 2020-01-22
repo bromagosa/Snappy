@@ -1626,7 +1626,23 @@ SyntaxElementMorph.prototype.labelPart = function (spec) {
         case '%p':
             part = new ReporterSlotMorph(true);
             break;
-
+        case '%font':
+            part = new InputSlotMorph(
+                null,
+                false,
+                {
+                    Monospace : ['monospace'],
+                    Arial : ['Arial'],
+                    Verdana : ['Verdana'],
+                    'Times New Roman' : ['Times New Roman'],
+                    'Courier New' : ['Courier New'],
+                    'Serif' : ['serif'],
+                    'Sans Serif' : ['sans-serif']
+                },
+                true
+            );
+            part.setContents(['code']);
+            break;
     // code mapping (experimental)
 
         case '%codeListPart':

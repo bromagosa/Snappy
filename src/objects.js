@@ -676,6 +676,13 @@ SpriteMorph.prototype.initBlocks = function () {
             category: 'pen',
             spec: 'fill'
         },
+        setFontFamily: {
+            only: SpriteMorph,
+            type: 'command',
+            category: 'pen',
+            spec: 'set font family %font',
+            defaults: ['monospace']
+        },
         write: {
             only: SpriteMorph,
             type: 'command',
@@ -1670,6 +1677,8 @@ SpriteMorph.prototype.init = function (globals) {
         'brightness': 0
     };
 
+    this.fontFamily = 'monospace';
+
     // sprite inheritance
     this.exemplar = null;
     this.instances = [];
@@ -2316,6 +2325,7 @@ SpriteMorph.prototype.blockTemplates = function (category) {
         blocks.push(block('doStamp'));
         blocks.push(block('floodFill'));
         blocks.push(block('write'));
+        blocks.push(block('setFontFamily'));
         blocks.push('-');
         blocks.push(block('reportPenTrailsAsCostume'));
         blocks.push('-');
@@ -4363,6 +4373,10 @@ SpriteMorph.prototype.clear = function () {
     this.parent.clearPenTrails();
 };
 
+SpriteMorph.prototype.setFontFamily = function (family) {
+    this.fontFamily = family;
+};
+
 SpriteMorph.prototype.write = function (text, size) {
     // thanks to Michael Ball for contributing this code!
     if (typeof text !== 'string' && typeof text !== 'number') {
@@ -4383,7 +4397,7 @@ SpriteMorph.prototype.write = function (text, size) {
         pos;
 
     context.save();
-    context.font = size + 'px monospace';
+    context.font = size + 'px ' + this.fontFamily;
     context.textAlign = 'left';
     context.textBaseline = 'alphabetic';
     context.fillStyle = this.color.toString();
